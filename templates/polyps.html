@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+
+
+{% block content %} 
+<div class="form_upload center">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="white">Custom File Upload</h1>
+			<p class="white">Model will identify polyps from colonoscopy images.</p>
+		</div>
+	</div>
+	
+	<form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+		<div class="row" style="margin-left: 280px;">
+			<div class="col-md-6 col-md-offset-3 center">
+				<div class="btn-container">
+					<!--the three icons: default, ok file (img), error file (not an img)-->
+					<h1 class="imgupload"><i class="fa fa-file-image-o"></i></h1>
+					<h1 class="imgupload ok"><i class="fa fa-check"></i></h1>
+					<h1 class="imgupload stop"><i class="fa fa-times"></i></h1>
+					<!--this field changes dinamically displaying the filename we are trying to upload-->
+					<p id="namefile">Only pics allowed! (jpg,jpeg,bmp,png)</p>
+					<!--our custom btn which which stays under the actual one-->
+					<button type="button" id="btnup" class="btn btn-primary btn-lg">Browse for your pic!</button>
+					<!--this is the actual file input, is set with opacity=0 beacause we wanna see our custom one-->
+					<input type="file" value="" name="myfile" id="fileup">
+				</div>
+			</div>
+		</div>
+			<!--additional fields-->
+            <div class="row">			
+                <div class="col-md-12">
+                    <!--the defauld disabled btn and the actual one shown only if the three fields are valid-->
+                    <input type="submit" value="Submit!" class="btn btn-primary" id="submitbtn">
+                    <button type="button" class="btn btn-default" disabled="disabled" id="fakebtn">Submit! <i class="fa fa-minus-circle"></i></button>
+                </div>
+            </div>
+	</form>
+    
+</div>
+<div class="row">
+    <div class="col-md-7" style="margin-top: 20px; margin-left: 20px;">
+        {% if uploaded_file_url %}
+			<img src="{{upload_file_url}}" style="width: 300px;height:300px">
+			<h5> {{alz_result}} Please </h5>
+		{% endif %}
+    </div>
+
+</div>
+
+{% endblock content %}

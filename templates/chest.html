@@ -1,0 +1,319 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+
+
+{% block content %} 
+<div class="form_upload center">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="white">Custom File Upload</h1>
+			<p class="white">Model will predicat if you have Covid, TB, Lung_Opacity, Viral Pneumonia or normal Lung</p>
+		</div>
+	</div>
+	
+	<form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+		<div class="row" style="margin-left: 280px;">
+			<div class="col-md-6 col-md-offset-3 center">
+				<div class="btn-container">
+					<!--the three icons: default, ok file (img), error file (not an img)-->
+					<h1 class="imgupload"><i class="fa fa-file-image-o"></i></h1>
+					<h1 class="imgupload ok"><i class="fa fa-check"></i></h1>
+					<h1 class="imgupload stop"><i class="fa fa-times"></i></h1>
+					<!--this field changes dinamically displaying the filename we are trying to upload-->
+					<p id="namefile">Only pics allowed! (jpg,jpeg,bmp,png)</p>
+					<!--our custom btn which which stays under the actual one-->
+					<button type="button" id="btnup" class="btn btn-primary btn-lg">Browse for your pic!</button>
+					<!--this is the actual file input, is set with opacity=0 beacause we wanna see our custom one-->
+					<input type="file" value="" name="myfile" id="fileup">
+				</div>
+			</div>
+		</div>
+			<!--additional fields-->
+            <div class="row">			
+                <div class="col-md-12">
+                    <!--the defauld disabled btn and the actual one shown only if the three fields are valid-->
+                    <input type="submit" value="Submit!" class="btn btn-primary" id="submitbtn">
+                    <button type="button" class="btn btn-default" disabled="disabled" id="fakebtn">Submit! <i class="fa fa-minus-circle"></i></button>
+                </div>
+            </div>
+	</form>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-7" style="margin-top: 20px; margin-left: 20px;">
+        <ul class="nav nav-pills nav-fill" style="font-size: 16px; background-color: rgb(166, 168, 163);border-radius: 60px;">
+            <li class="nav-item">
+              <a class="nav-link" id="covid" href="#" style="color: black;">Covid</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="TB" href="#" style="color: black;">tuberculosis(TB)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="viral_p" href="#" style="color: black;">viral pneumonia</a>
+              </li>
+            
+        </ul>
+
+
+        <div id="covid_detail" style="margin-top: 100px;" >
+            <h2>What is coronavirus?</h2>
+            <p>oronaviruses are a family of viruses that can cause respiratory illness in humans. They are called “corona” because of crown-like spikes on the surface of the virus. Severe acute respiratory syndrome (SARS), Middle East respiratory syndrome (MERS) and the common cold are examples of coronaviruses that cause illness in humans.
+        
+                The new strain of coronavirus — SARS-CoV-2 — was first reported in Wuhan, China in December 2019. It has since spread to every country around the world.</p>
+            <h2>How do you get COVID-19?</h2>
+            <p>SARS-CoV-2, the virus that causes COVID-19, enters your body through your mouth, nose or eyes (directly from the airborne droplets or from the transfer of the virus from your hands to your face). It then travels to the back of your nasal passages and mucous membrane in the back of your throat. It attaches to cells there, begins to multiply and moves into lung tissue. From there, the virus can spread to other body tissues.</p>
+            <h2>How does the new coronavirus (SARS-CoV-2) spread from person to person?</h2>
+            <p>he virus travels in respiratory droplets released into the air when an infected person coughs, sneezes, talks, sings or breathes near you. You may be infected if you inhale these droplets.
+                You can also get coronavirus from close contact (touching, shaking hands) with an infected person and then touching your face.</p>
+            <h2>How long is a person with COVID-19 considered contagious?</h2>
+            <p>If you have COVID-19 it can take several days to develop symptoms — but you’re contagious during this time. You are no longer contagious 10 days after your symptoms began.
+        
+                The best way to avoid spreading COVID-19 to others is to:</p>
+            <ul>
+                <li>Stay 6 feet away from others whenever possible.</li>
+                <li>Wear a cloth mask that covers your mouth and nose when around others.</li>
+                <li>Wash your hands often. If soap isn’t available, use a hand sanitizer that contains at least 60% alcohol.</li>
+                <li>Avoid crowded indoor spaces. Open windows to bring in outdoor air as much as possible.</li>
+                <li>Stay self-isolated at home if you are feeling ill with symptoms that could be COVID-19 or have a positive test for COVID-19.</li>
+        
+            </ul>
+            <h2>How soon after becoming infected with SARS-CoV-2 will I develop COVID-19 symptoms?</h2>
+            <p>The time between becoming infected and showing symptoms (incubation period) can range from two to 14 days. The average time before experiencing symptoms is five days. Symptoms can range in severity from very mild to severe. In about 80% of people, COVID-19 causes only mild symptoms, although this may change as variants emerge.</p>
+            <h2>What are the symptoms of COVID-19?</h2>
+            <p>Signs and symptoms of coronavirus disease 2019 (COVID-19) may appear 2 to 14 days after exposure. This time after exposure and before having symptoms is called the incubation period. You can still spread COVID-19 before you have symptoms (presymptomatic transmission). Common signs and symptoms can include:
+
+                Fever
+                Cough
+                Tiredness
+                Early symptoms of COVID-19 may include a loss of taste or smell.</p>
+            <p>Other symptoms can include::Shortness of breath or difficulty breathing
+                Muscle aches
+                Chills
+                Sore throat
+                Runny nose
+                Headache
+                Chest pain
+                Pink eye (conjunctivitis)
+                Nausea
+                Vomiting
+                Diarrhea
+                Rash </p>
+            <p>his list isn't complete. Children have similar symptoms to adults and generally have mild illness.
+
+                The severity of COVID-19 symptoms can range from very mild to severe. Some people may have only a few symptoms. Some people may have no symptoms at all, but can still spread it (asymptomatic transmission). Some people may experience worsened symptoms, such as worsened shortness of breath and pneumonia, about a week after symptoms start.
+                
+                Some people experience COVID-19 symptoms for more than four weeks after they're diagnosed. These health issues are sometimes called post-COVID-19 conditions. Some children experience multisystem inflammatory syndrome, a syndrome that can affect some organs and tissues, several weeks after having COVID-19. Rarely, some adults experience the syndrome too.</p>
+            <p>People who are older have a higher risk of serious illness from COVID-19, and the risk increases with age. People who have existing medical conditions also may have a higher risk of serious illness. Certain medical conditions that may increase the risk of serious illness from COVID-19 include:
+
+                Serious heart diseases, such as heart failure, coronary artery disease or cardiomyopathy,
+                Cancer,
+                Chronic obstructive pulmonary disease (COPD),
+                Type 1 or type 2 diabetes,
+                Overweight, obesity or severe obesity,
+                High blood pressure,
+                Smoking,
+                Chronic kidney disease,
+                Sickle cell disease or thalassemia,
+                Weakened immune system from solid organ transplants or bone marrow transplants,
+                Pregnancy,
+                Asthma,
+                Chronic lung diseases such as cystic fibrosis or pulmonary hypertension,
+                Liver disease,
+                Dementia,
+                Down syndrome,
+                Weakened immune system from bone marrow transplant, HIV or some medications,
+                Brain and nervous system conditions, such as strokes,
+                Substance use disorders.</p>
+
+            <h2>When to see a doctor</h2>
+            <p>If you have COVID-19 signs or symptoms or you've been in contact with someone diagnosed with COVID-19, contact your health care provider right away for medical advice. Your health care provider will likely recommend that you get tested for COVID-19. If you have emergency COVID-19 symptoms, such as trouble breathing, seek care immediately. If you need to go to a hospital, call ahead so that health care providers can take steps to ensure that others aren't exposed.</p>
+            <p>If you have emergency COVID-19 signs and symptoms, seek care immediately. Emergency signs and symptoms can include:
+
+                Trouble breathing,
+                Persistent chest pain or pressure,
+                Inability to stay awake,
+                New confusion,
+                Pale, gray or blue-colored skin, lips or nail beds — depending on skin tone</p>
+                <h2>Prevention</h2>
+                <p>The U.S. Food and Drug Administration (FDA) has given emergency use authorization to some COVID-19 vaccines in the United States. The FDA has approved the Pfizer-BioNTech COVID-19 vaccine, now called Comirnaty, to prevent COVID-19 in people age 12 and older. The FDA has given emergency use authorization to Pfizer-BioNTech COVID-19 vaccines for ages 6 months through 11 years.
+
+                    The FDA has approved the Moderna vaccine, now called Spikevax, to prevent COVID-19 in people age 18 and older. The FDA has also authorized the Moderna COVID-19 vaccine in children ages 6 months through 17 years old. The FDA has also authorized the Novavax COVID-19, adjuvanted vaccine to prevent COVID-19 in people age 12 and older.</p>
+                <p>Due to the risk of a potentially life-threatening blood-clotting problem, the FDA is restricting use of the Janssen/Johnson & Johnson vaccine to certain people age 18 and older. Examples include people who had a severe allergic reaction after getting an mRNA COVID-19 vaccine and people who can't get an mRNA COVID-19 vaccine due to limited access or personal or religious concerns. If you get this vaccine, be sure to understand the risks and symptoms of the blood-clotting problem.
+
+                    A vaccine can prevent you from getting the COVID-19 virus or prevent you from becoming seriously ill if you get the COVID-19 virus. In addition, COVID-19 vaccination might offer better protection than getting sick with COVID-19. A recent study showed that unvaccinated people who already had COVID-19 are more than twice as likely as fully vaccinated people to get reinfected with COVID-19.</p>
+                <p>After getting vaccinated, you can more safely return to many activities you may not have been able to do because of the pandemic. However, if you are in an area with a high number of people with COVID-19 in the hospital and new COVID-19 cases, the CDC recommends wearing a mask indoors in public. You're considered fully vaccinated two weeks after you get a second dose of an mRNA COVID-19 vaccine, after two doses of the Novavax vaccine, or two weeks after you get a single dose of the Janssen/Johnson & Johnson COVID-19 vaccine. You are considered up to date with your vaccines if you have gotten all recommended COVID-19 vaccines, including booster doses, when you become eligible.
+
+                    An additional primary dose of a COVID-19 vaccine is recommended for people who are vaccinated and might not have had a strong enough immune response.
+                    
+                    In contrast, a booster dose is recommended for people who are vaccinated and whose immune response weakened over time. Research suggests that getting a booster dose can decrease your risk of infection and severe illness with COVID-19.
+                    
+                    People who have a moderately or severely weakened immune system should get an additional primary shot and a booster shot.</p>
+                <p>Additional primary shot. The CDC recommends an additional primary shot of an mRNA COVID-19 vaccine for some people with weakened immune systems, such as those who have had an organ transplant. People with weakened immune systems might not develop enough immunity after vaccination with two doses of an mRNA COVID-19 vaccine or one dose of the Janssen/Johnson & Johnson COVID-19 vaccine. An additional shot using an mRNA COVID-19 vaccine might improve their protection against COVID-19. This recommendation for an additional mRNA COVID-19 shot is for people ages 6 months and older.
+
+                    The additional primary shot should be given at least four weeks after a second dose of an mRNA COVID-19 vaccine or one dose of the Janssen/Johnson & Johnson COVID-19 vaccine. The additional primary shot should be the same brand as the other two mRNA COVID-19 vaccine doses that were given. If the brand given isn't known, either brand of mRNA COVID-19 vaccine can be given as a third dose.</p>
+                <p>Booster dose. These recommendations differ by age, what vaccines you have been given and the state of your immune system.
+
+                    People age 5 and older who had all recommended doses of the Moderna, Pfizer-BioNTech or Novavax COVID-19 vaccines can get the Pfizer-BioNTech COVID-19 updated, or bivalent booster. This booster is based on the original virus strain and two Omicron strains. People age 6 and older can choose between the Pfizer-BioNTech and the Moderna COVID-19 bivalent vaccine booster. You can get the booster shot at least two months after their last shot. If you recently had a positive COVID-19 test, you may consider waiting three months from when their symptoms started to get the booster.
+                    
+                    If you are age 18 or older, and got the Janssen COVID-19 vaccine, you can get either of the mRNA vaccine bivalent boosters at least two months after your shot.
+                    
+                    People 18 and older may also get a Novavax booster based on the original virus strain as a first booster at least six months after their last shot.
+                    
+                    Pregnant people can also get a COVID-19 booster dose.</p>
+
+            </div>
+
+            <div id="Tuberculosis_detail" >
+                <h1>What is TB?</h1>
+                <p>Tuberculosis, or TB, is a bacterial infection that usually infects the lungs. Other organs, such as the kidneys, spine, or brain may also be involved. TB is primarily spread from person to person in an airborne manner, such as when an infected person coughs or sneezes. It can also cause an active infection after a period of not being active in someone who was exposed at an earlier time.
+
+                    There is a difference between being infected with the TB bacterium and having active tuberculosis disease.
+                    
+                    The following are the stages of TB:</p>
+
+                <li>Exposure. This happens when a person has been in contact with, or exposed to, another person who has TB. The exposed person will have a negative skin test, a normal chest X-ray, and no signs or symptoms of the disease.</li>
+                <li>Latent TB infection. This happens when a person has TB bacteria in his or her body, but does not have symptoms of the disease. The infected person's immune system walls off the TB organisms, and the TB remains inactive throughout life in most people who are infected. This person would have a positive skin test, but a normal chest X-ray.</li>
+                <li>TB disease. This describes the person who has signs and symptoms of an active infection. The person would have a positive skin test and a positive chest X-ray.</li>
+                <h2>What causes TB?</h2>
+                <p>The main TB bacterium is Mycobacterium tuberculosis (M. tuberculosis). Many people infected with this bacterium never develop active TB. They remain in the latent (inactive) TB stage. However, in people with weak immune systems, especially those with HIV (human immunodeficiency virus), or those receiving medicines that suppress the immune system, TB organisms can overcome the body's defenses, multiply, and cause an active disease.
+
+                    The TB bacterium is spread through the air when an infected person coughs, sneezes, speaks, sings, or laughs. It’s not likely to be spread through personal items, such as clothing, bedding, a drinking glass, eating utensils, a handshake, a toilet, or other items that a person with TB has touched. Good ventilation is the most important measure to prevent the transmission of TB.</p>
+            <h2>Who is at risk for TB?</h2>
+            <p>TB affects people of all ages, races and income levels. Those at higher risk include the following:
+
+                People who live or work with others who have TB,
+                Those who can’t access health care,
+                Homeless people,
+                People from other countries where TB is prevalent,
+                People in group settings, such as nursing homes,
+                People who abuse alcohol,
+                People who use intravenous drugs,
+                People with weak immune systems,
+                The elderly,
+                Healthcare workers who come in contact with high-risk populations</p>
+
+                <h2>What are the symptoms of TB?</h2>
+                <p>The following are the most common symptoms of active TB. However, each person may experience symptoms differently:
+
+                    Cough that lasts 3 weeks or longer
+                    Chest pain
+                    Fatigue
+                    Loss of appetite
+                    Unintended weight loss
+                    Poor growth in children
+                    Fever
+                    Coughing blood or sputum
+                    Chills or night sweats
+                    The symptoms of TB may look like other lung conditions or medical problems. Talk with a healthcare provider for a diagnosis.</p>
+
+                <h2>How is TB diagnosed?</h2>
+                <p>TB is often diagnosed with a skin test. In this test, a small amount of testing material is injected into the top layer of the skin. If a certain size bump develops within 2 or 3 days, the test may be positive for tuberculosis infection. Other tests include X-rays and sputum tests. A blood test can be done in place of the TB skin test.
+
+                    TB skin tests are suggested for those:
+                    
+                    In high-risk categories
+                    Who live or work in close contact with people who are at high risk
+                    Who have never had a TB skin test
+                    For skin testing in children, the American Academy of Pediatrics recommends testing:
+                    
+                    If the child is thought to have been exposed in the last 5 years
+                    If the child has an X-ray that looks like TB
+                    If the child has any symptoms of TB
+                    If the child comes from a country where TB is prevalent
+                    For children with HIV
+                    For children receiving medicines that suppress the immune system
+                    For children who are in detention facilities
+                    For children who are exposed to high-risk people
+                    If the child's parent has come from a high-risk country
+                    If the child has traveled to high-risk areas
+                    If the child lives in a densely populated area</p>
+                <h2>How is TB treated?</h2>
+                <p>Your healthcare provider will figure out the best treatment for you based on:
+
+                    How old you are
+                    Your overall health and past health
+                    How sick you are
+                    How well you can handle specific medicines, procedures, or therapies
+                    How long the condition is expected to last
+                    Your opinion or preference</p>
+                    <p>reatment may include:
+
+                        Short-term hospitalization
+                        For latent TB which is newly diagnosed: Usually a 6 to 12 month course of antibiotic called isoniazid will be given to kill off the TB organisms in the body. Some people with latent TB may be treated with a shorter course of 2 antibiotics for only 3 months.
+                        For active TB: Your healthcare provider may prescribe 3 or more antibiotics in combination for 6 to 9 months or longer. Examples include: isoniazid, rifampin, pyrazinamide, and ethambutol. People usually begin to improve within a few weeks of the start of treatment. After several weeks of treatment with the correct medicines, the person is usually no longer contagious, if treatment is carried through to the end, as prescribed by a healthcare provider.</p>
+                    <h2>Can TB be prevented?</h2>  
+                    <p>If you will be spending time with a person or people with active TB, wear a face mask and try not to stay in a small enclosed space with poor ventilation. People who work in situations where there is a high risk for encountering people infected with TB, such as healthcare workers, should be tested for TB on a routine basis. In countries outside the U.S. where TB is more common, a childhood vaccine is often given.</p>  
+            
+            
+            </div>
+
+            <div id="viral" >
+                <h1>Viral Pneumonia</h1>
+                <p>Pneumonia is an infection in your lungs, and it can make you feel very sick. It's usually caused by bacteria, viruses, or fungi. In the U.S., about 30% of pneumonias are viral.</p>
+                <h2>Symptoms</h2>
+                <p>These include:
+
+                    Dry cough,
+                    Fever,
+                    Chills,
+                    Shortness of breath,
+                    Pain in your chest when you cough or breathe,
+                    Rapid breathing,
+                    If you have any of these symptoms, call your doctor.</p>
+
+                <h2>Causes</h2>
+                <p>Viruses that can lead to pneumonia include:
+
+                    Influenza (flu) A and B viruses, the most common causes in adults
+                    Respiratory syncytial virus (RSV), which is more common in infants and children than in adults
+                    Coronaviruses, including SARS-CoV-2, the new virus that causes COVID-19
+                    Rhinoviruses, parainfluenza viruses, and adenoviruses, which can also cause pinkeye
+                    Other viruses that more rarely cause pneumonia include herpes simplex, measles, and chickenpox.</p>
+
+                <h2>How Viral Pneumonia Spreads</h2>
+                <p>Viruses that cause pneumonia travel through the air in droplets of fluid after someone sneezes or coughs. These fluids can get into your body through your nose or mouth. You can also get viral pneumonia after touching a virus-covered doorknob or keyboard and then touching your mouth or nose.</p>
+
+                <h2>Diagnosing Viral Pneumonia</h2>
+                <p>Your doctor’s diagnosis will depend on how severe your infection is. If you have mild symptoms, your doctor may suggest blood tests or a chest X-ray.
+
+                    If your symptoms are serious, and you are 65 or older (or an infant or young child), your doctor might want to test some of your fluids. They may also put a camera down your throat to check your airways.</p>
+
+                <h2>Treatment</h2>
+
+                <p>If a virus is causing your pneumonia, antibiotics won’t help. Your doctor may give you an antiviral medication.
+
+                    If you have an influenza virus, your doctor may prescribe medications such as oseltamivir (Tamiflu), zanamivir (Relenza), or peramivir (Rapivab). These drugs keep flu viruses from spreading in your body.
+                    If RSV is the cause of your pneumonia, your doctor may prescribe a medication such as ribavirin (Virazole). This helps to limit the spread of viruses.
+                    When you have pneumonia, it’s important to get plenty of rest. You might take over-the-counter medicines to fight your fever and ease pain. Be sure to drink plenty of fluids. Check in with your doctor after treatment to make sure your lungs are clear.
+                    
+                    In severe cases, you may need to stay in the hospital to get help breathing.</p>
+
+                    <h2>Prevention</h2>
+                    <p>The same steps you would take to try to prevent the flu also help lower your chance of pneumonia.
+
+                        Wash your hands often. Scrub them with soap and water for at least 20 seconds before you eat or prepare food. When you are in public places, use sanitizer.
+                        Get a flu vaccination each year at the beginning of flu season.
+                        Stay away from people who are coughing or sneezing.
+                        Try not to touch your eyes, ears, nose, and mouth.
+                         Show Sources
+                        </p>
+            </div>
+        
+
+
+    </div>
+
+<div class="col-md-4">
+    <h1>Uploaded Picture</h1>
+    {% if uploaded_file_url %}
+    <img src="{{uploaded_file_url}}" style="width: 300px;height:300px">
+    <h5> {{chest_result}} Please </h5>
+{% endif %}
+
+</div>
+</div>
+{% endblock content %}

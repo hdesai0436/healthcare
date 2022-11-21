@@ -1,0 +1,142 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+
+
+{% block content %} 
+
+<div class="form_upload center">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="white">Custom File Upload</h1>
+			<p class="white">Model Will predict if tumore detect or Not.</p>
+		</div>
+	</div>
+	
+	<form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+		<div class="row" style="margin-left: 280px;">
+			<div class="col-md-6 col-md-offset-3 center">
+				<div class="btn-container">
+					<!--the three icons: default, ok file (img), error file (not an img)-->
+					<h1 class="imgupload"><i class="fa fa-file-image-o"></i></h1>
+					<h1 class="imgupload ok"><i class="fa fa-check"></i></h1>
+					<h1 class="imgupload stop"><i class="fa fa-times"></i></h1>
+					<!--this field changes dinamically displaying the filename we are trying to upload-->
+					<p id="namefile">Only pics allowed! (jpg,jpeg,bmp,png)</p>
+					<!--our custom btn which which stays under the actual one-->
+					<button type="button" id="btnup" class="btn btn-primary btn-lg">Browse for your pic!</button>
+					<!--this is the actual file input, is set with opacity=0 beacause we wanna see our custom one-->
+					<input type="file" value="" name="myfile" id="fileup">
+				</div>
+			</div>
+		</div>
+			<!--additional fields-->
+            <div class="row">			
+                <div class="col-md-12">
+                    <!--the defauld disabled btn and the actual one shown only if the three fields are valid-->
+                    <input type="submit" value="Submit!" class="btn btn-primary" id="submitbtn">
+                    <button type="button" class="btn btn-default" disabled="disabled" id="fakebtn">Submit! <i class="fa fa-minus-circle"></i></button>
+                </div>
+            </div>
+	</form>
+	</div>
+	<div class="row">
+		<div class="col-md-7" style="margin-top: 20px; margin-left: 20px;">
+	<div class="row az_detail" style="margin-top:30px;">
+		<h1 style="margin: 0 auto;">Alzheimer’s Disease and Related Dementias</h1>
+		<ul class="nav flex-column col-6">
+			<li class="nav-item">
+			  <a class="nav-link active" href="#Alzheimer’s Disease?">What is Alzheimer's Disease?</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="#what_we_know">What we know?</a>
+			</li>
+			
+			
+		</ul>
+		<ul class="nav flex-column col-6">
+			<li class="nav-item">
+				<a class="nav-link active" href="#Recognizing_signs">Recognizing signs of Alzheimer's</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="#warning">10 Warning Signs of Alzheimer's</a>
+			</li>
+			
+			
+		</ul>
+		<h1 id="Alzheimer’s Disease?">What is Alzheimer’s Disease?</h1>
+		<ul>
+			<li>Alzheimer’s disease is the most common type of dementia.</li>
+			<li>It is a progressive disease beginning with mild memory loss and possibly leading to loss of the ability to carry on a conversation and respond to the environment.</li>
+			<li>Alzheimer’s disease involves parts of the brain that control thought, memory, and language.</li>
+			<li>It can seriously affect a person’s ability to carry out daily activities.</li>
+		</ul>
+		<h2>Who has Alzheimer’s Disease?</h2>
+		<p>In 2020, as many as 5.8 million Americans were living with Alzheimer’s disease.1
+			Younger people may get Alzheimer’s disease, but it is less common.
+			The number of people living with the disease doubles every 5 years beyond age 65.
+			This number is projected to nearly triple to 14 million people by 2060.1
+			Symptoms of the disease can first appear after age 60, and the risk increases with age.</p>
+		
+		
+		<h2 id = 'what_we_know'>What is known about Alzheimer’s Disease?</h2>
+		<p>Scientists do not yet fully understand what causes Alzheimer’s disease. There likely is not a single cause but rather several factors that can affect each person differently.</p>
+		<ul>
+			<li>Age is the best known risk factor for Alzheimer’s disease.</li>
+			<li>Family history—researchers believe that genetics may play a role in developing Alzheimer’s disease. However, genes do not equal destiny. A healthy lifestyle may help reduce your risk of developing Alzheimer’s disease. Two large, long term studies indicate that adequate physical activity, a nutritious diet, limited alcohol consumption, and not smoking may help people. To learn more about the study, you can listen to a short podcast.</li>
+			<li>Changes in the brain can begin years before the first symptoms appear.</li>
+			<li>Researchers are studying whether education, diet, and environment play a role in developing Alzheimer’s disease.</li>
+			<li>There is growing scientific evidence that healthy behaviors, which have been shown to prevent cancer, diabetes, and heart disease, may also reduce risk for subjective cognitive decline. Here’s 8 ways.</li>
+		</ul>
+		<h2 id="Recognizing_signs">What are the warning signs of Alzheimer’s disease?</h2>
+		<p>Alzheimer’s disease is not a normal part of aging. Memory problems are typically one of the first warning signs of Alzheimer’s disease and related dementias.<br>
+		
+			In addition to memory problems, someone with symptoms of Alzheimer’s disease may experience one or more of the following:</p>
+		<ul>
+			<li>Memory loss that disrupts daily life, such as getting lost in a familiar place or repeating questions.</li>
+			<li>Trouble handling money and paying bills.</li>
+			<li>Difficulty completing familiar tasks at home, at work or at leisure.</li>
+			<li>Decreased or poor judgment.</li>
+			<li>Misplacing things and being unable to retrace steps to find them.</li>
+			<li>Changes in mood, personality, or behavior.</li>
+		</ul>
+		<h2 id="warning">10 Warning Signs of Alzheimer's</h2>
+		<p>Memory often changes as people grow older. Some people notice changes in themselves before anyone else does. For other people, friends and family are the first to see changes in memory, behavior, or abilities. Memory loss that disrupts daily life is not a typical part of aging. People with one or more of these 10 warning signs should see a doctor to find the cause. Early diagnosis gives them a chance to seek treatment and plan for the future.</p>
+		<ul>
+			<ol>1. Memory loss that disrupts daily life: forgetting events, repeating yourself or relying on more aids to help you remember (like sticky notes or reminders).</ol>
+			<ol>Challenges in planning or solving problems: having trouble paying bills or cooking recipes you have used for years.</ol>
+			<ol>Difficulty completing familiar tasks at home, at work, or at leisure: having problems with cooking, driving places, using a cell phone, or shopping.</ol>
+			<ol>Confusion with time or place: having trouble understanding an event that is happening later, or losing track of dates.</ol>
+			<ol>Trouble understanding visual images and spatial relations: having more difficulty with balance or judging distance, tripping over things at home, or spilling or dropping things more often.</ol>
+			<ol>New problems with words in speaking or writing: having trouble following or joining a conversation or struggling to find a word you are looking for (saying “that thing on your wrist that tells time” instead of “watch”).</ol>
+			<ol>Misplacing things and losing the ability to retrace steps: placing car keys in the washer or dryer or not being able to retrace steps to find something.</ol>
+			<ol>Decreased or poor judgment: being a victim of a scam, not managing money well, paying less attention to hygiene, or having trouble taking care of a pet.</ol>
+			<ol>Withdrawal from work or social activities: not wanting to go to church or other activities as you usually do, not being able to follow football games or keep up with what’s happening.</ol>
+			<ol>Changes in mood and personality: getting easily upset in common situations or being fearful or suspicious.</ol>
+		</ul>
+		<h2>What to do if you suspect Alzheimer’s disease</h2>
+		<p>Getting checked by your healthcare provider can help determine if the symptoms you are experiencing are related to Alzheimer’s disease, or a more treatable conditions such as a vitamin deficiency or a side effect from medication. Early and accurate diagnosis also provides opportunities for you and your family to consider financial planning, develop advance directives, enroll in clinical trials, and anticipate care needs.</p>
+		<h2>How is Alzheimer’s disease treated?</h2>
+		<p>Medical management can improve quality of life for individuals living with Alzheimer’s disease and for their caregivers. There is currently no known cure for Alzheimer’s disease. Treatment addresses several areas:
+
+			Helping people maintain brain health.
+			Managing behavioral symptoms.
+			Slowing or delaying symptoms of the disease.</p>
+			<h2>What is known about reducing your risk of Alzheimer’s Disease?</h2>
+			<p>The science on risk reduction is quickly evolving, and major breakthroughs are within reach. For example, there is growing evidence that people who adopt healthy lifestyle habits — like regular exercise and blood pressure management — can lower their risk of dementia. There is growing scientific evidence that healthy behaviors, which have been shown to prevent cancer, diabetes, and heart disease, may also reduce risk for subjective cognitive decline.</p>
+		</div>
+		</div>
+		<div class="col-md-4">
+			<h1>Uploaded Picture</h1>
+			{% if uploaded_file_url %}
+			<img src="{{upload_file_url}}" style="width: 300px;height:300px">
+			<h5> {{alz_result}} Please </h5>
+		{% endif %}
+		
+		</div>
+    
+</div>
+
+{% endblock content %}
